@@ -1,0 +1,7 @@
+<h1>YOU'RE IN CREATE NEW LISTING PAGE</h1>
+
+
+<%= form_for :listing, html: { multipart: true }, action: :create, method: :post do |form| %>
+  <%= render partial: 'partials/form', locals: { f: form } %>
+ <%= form.submit "Submit" %>
+<% end %>

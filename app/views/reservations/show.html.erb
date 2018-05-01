@@ -1,0 +1,24 @@
+<h1>Show all reservations</h1>
+
+
+<table>
+	<th>Reservation ID</th>
+	<th>User ID</th>
+	<th>Listing ID</th>
+	<th>Check In</th>
+	<th>Check Out</th>
+	<th>Number of Guests</th>
+	<th>Verification</th>
+
+	<%= @rsvp.each do |r| %>
+	<tr>
+		<td><%= r.id %></td>
+		<td><%= r.user_id%></td>
+		<td><%= r.listing_id%></td>
+		<td><%= r.start_date%></td>
+		<td><%= r.end_date%></td>
+		<td><%= r.guest_number%></td>
+		<td><%= r.verification%></td>
+	</tr>
+	<% end %>
+</table>

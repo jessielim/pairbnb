@@ -1,0 +1,46 @@
+<h1>YOU"RE IN LISTING EDIT PAGE</h1>
+
+<h1><%= @listing.name %></h1>
+
+<% if @listing.images? %>
+<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+  <ol class="carousel-indicators">
+    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+  </ol>
+  <div class="carousel-inner">
+    <% @listing.images.each do|img| %>
+    <div class="carousel-item  <%= 'active' if img == @listing.images[0] %>">    
+      <img class="d-block w-50" src=<%=  img.url %> alt="First slide" >
+    </div>
+    <% end %>
+  </div>
+     
+     <%# @listing.images[0].url %>
+  <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+<% else %>
+<%= image_tag "https://via.placeholder.com/400x200"%>
+<% end %>
+
+
+<% @listing.images.each do |image| %>
+	<%= image_tag(image.url(:thumb)) %>
+<% end %>
+
+<%= form_for :listing, html: { multipart: true }, action: :update, method: :post do |form| %>
+  <%= render partial: 'partials/form', locals: { f: form } %>
+ <%= form.submit "Submit" %>
+<% end %>
+
+
+<br>
+
