@@ -10,7 +10,9 @@ class ReservationsController < ApplicationController
 		
 		if date_checker(@rsvp.start_date, @rsvp.end_date)
 			@rsvp.save
-			redirect_to root_path
+
+  			ReservationMailer.confirmation_email(current_user,@listing,@rsvp).deliver_now
+			redirect_to braintree_new_path
 		else
 			redirect_to reservation_new_path
 		end
@@ -24,9 +26,9 @@ class ReservationsController < ApplicationController
 	def date_checker(start_date,end_date)
 		@reservation = Reservation.where("listing_id = ?" , params[:id])
 		if @reservation
-			byebug
+			
 			@reservation.each do |r|
-				byebug
+				
 				if 	!(r.end_date <= start_date || r.start_date >= end_date)
 						flash[:notice] ="Sorry, dates has been taken."
 					return false

@@ -1,0 +1,14 @@
+Welcome to Airbnb, <%= @user.first_name %>
+===============================================
+ 
+You have successfully booked <%= @listing.name %> from our website,
+      your email registered is: <%= @user.email %>.
+ 
+ Your reservation ID is : <%= @rsvp_id.id %>
+ 
+ Your booked dates are :
+Check-in date: <%= @rsvp_id.start_date %>
+ Check-out date: <%= @rsvp_id.end_date %>
+To login to the site, just follow this link: <%= @url %>.
+ 
+Thanks for joining and have a great day!

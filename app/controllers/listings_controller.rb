@@ -16,9 +16,12 @@ class ListingsController < ApplicationController
 	end
 
 	def create
+		@user = current_user.id
   		@listing = Listing.create(listing_params)
+  		
   		redirect_to root_path
-	end
+  		
+  	end
 
 	def show
 		@listing = Listing.find(params[:id])

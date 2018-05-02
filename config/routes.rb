@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  get 'braintree/new'
-  post 'braintree/checkout'
-
-  get 'welcome/index'
+  
   resources :properties
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]
@@ -51,5 +48,10 @@ Rails.application.routes.draw do
 
   get '/reservations' => "reservations#show", as: "reservation_show"
 
+  get 'welcome/index'
+
+  get 'braintree/:id' => "braintree#new" 
   
+  post 'braintree/checkout'
+
 end

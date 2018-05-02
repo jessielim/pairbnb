@@ -9,7 +9,7 @@
 	<th>Check Out</th>
 	<th>Number of Guests</th>
 	<th>Verification</th>
-
+	<th>Payment</th>
 	<%= @rsvp.each do |r| %>
 	<tr>
 		<td><%= r.id %></td>
@@ -19,6 +19,8 @@
 		<td><%= r.end_date%></td>
 		<td><%= r.guest_number%></td>
 		<td><%= r.verification%></td>
+		<td><%= link_to "Make Payment", "braintree/#{r.id}" %></td>
+
 	</tr>
 	<% end %>
 </table>
