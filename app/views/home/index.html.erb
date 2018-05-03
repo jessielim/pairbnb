@@ -1,51 +1,17 @@
-<h1>HOME</h1>
-
-<%= link_to "Sign in with Google", "/auth/google_oauth2?prompt=select_account" %>
-<br>
-<%= link_to "about us", about_path %>
-
-<% if @listing.blank? %>
-  <h4>There are no listings containing the term <%= params[:search] %>.</h4>
-<% end %>
-
-<%= link_to "brain tree", "/welcome/index"%>
-
-<table>
-	<th>User ID</th>
-	<th>Email</th>
-	<th>First Name</th>
-	<th>Last Name</th>
-	<th>Phone</th>
-	<th>Gender</th>
-	<th>Birthday</th>
-	<th>Role</th>
-	<th>Avatar</th>
-
-	<% @user.each do |user| %>
-	
-	<tr>
-	<td><%= user.id%></td>
-	<td><%= user.email%></td>
-	<td><%= user.first_name%></td>
-	<td><%= user.last_name%></td>
-	<td><%= user.phone%></td>
-	<td><%= user.gender%></td>
-	<td><%= user.birthday%></td>
-	<td><%= user.role%></td>
-	<td><%= user.avatar%></td>	
-	</tr>
-<% end %>
-</table>
 
 <%= page_entries_info @listing, entry_name: 'item' %>
 <%= paginate @listing, theme: 'twitter-bootstrap-4' %>
-<%# paginate @listing, views_prefix: 'bootstrap4' %>
+<%= @user.each do |u| u end%>
 <div class="container">
   <div class="row">
 	<% @listing.each do |l| %>
     	<div class="col-sm">
      		<div class="card" style="width: 18rem;">
-				<img class="card-img-top" src="https://via.placeholder.com/200x200" alt="Card image cap">
+	     		<% if l.images? %>
+	     			<img class="card-img-top" src=<%= l.images[0] %> alt="Card image cap">
+	     		<% else %>
+					<img class="card-img-top" src="https://s3-ap-southeast-1.amazonaws.com/jeshii-airbnb/default-image.jpg" alt="Card image cap">
+				<% end%>
 			<div class="card-body">
 				<h5 class="card-title"><%= l.name %></h5>
 				<p class="card-text"><%= l.description %></p>

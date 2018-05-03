@@ -1,6 +1,8 @@
 <h1>Braintree#new</h1>
 <p>Find me in app/views/braintree/new.html.erb</p>
 
+<%# @listing = Listing.find_by(id: @this_reservation.listing_id)%>
+<%# @listing.price %>
     <div class="text-field">
     <h3>Reservation Number: </h3>
     <%= @reserve.id%>
@@ -22,14 +24,16 @@
     <%= @reserve.guest_number%>
     </div>
 
+    <div class="text-field">
+    <h3>Total amount: </h3>
+    <%= @reserve.listing.price%>
+    </div>
+
 
 <div class="demo-frame">
 
-<%= form_for :checkout_form, url: braintree_checkout_path, html: { id: "cardForm"} do |form| %>
+<%= form_for :checkout_form, url: braintree_checkout_path(listing_id: @listing_id), html: { id: "cardForm"} do |form| %>
     
-    <%= form.label :total_amount, "Total amount", html: {class: "hosted-fields--label"} %>
-    <div id="price" class="hosted-field"></div>
-
     <%= form.label :card_number, "Credit Card Number", html: {class: "hosted-fields--label"} %>
     <div id="card-number" class="hosted-field"></div>
 
@@ -47,7 +51,9 @@
   <% end %>
 </div>
 
-<script >
+
+
+<script>
 
 var form = document.querySelector('#cardForm');
 var submit = document.querySelector("#button-btn");
@@ -77,10 +83,6 @@ braintree.client.create({
     },
     fields: {
       number: {
-        selector: '#price',
-        value: <%= Listing.price %>
-      },
-      number: {
         selector: '#card-number',
         placeholder: '4111 1111 1111 1111'
       },
@@ -107,6 +109,7 @@ braintree.client.create({
       hostedFieldsInstance.tokenize(function (tokenizeErr, payload) {
         if (tokenizeErr) {
           // Handle error in Hosted Fields tokenization
+          alert("Token error")
           return;
         }
 
