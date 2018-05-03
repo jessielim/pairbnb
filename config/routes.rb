@@ -1,5 +1,7 @@
+require 'sidekiq/web'
 Rails.application.routes.draw do
   
+mount Sidekiq::Web => '/sidekiq'
   resources :properties
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   resource :session, controller: "clearance/sessions", only: [:create]

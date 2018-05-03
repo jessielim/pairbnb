@@ -63,3 +63,36 @@
 #carouselExampleIndicators {
 	width: 75%;
 }
+
+.bg-color{
+  background-color: #66cdaa;
+}
+
+.nav-link{
+  font-size: 16px;
+}
+
+.navbar-brand {
+  width: 70px;
+  height: 60px;
+  overflow: hidden;
+}
+
+.navbar-brand img {
+  width: 100px;
+  height: 100px;
+  margin: -15px 0 0 -10px;
+}
+
+.navbar-brand:hover{
+  background-color: #66cdaa;
+} 
+
+.nav-link:hover{
+background-color: #20b2aa;
+}
+
+.nav-link {
+  text-align: center;
+  line-height: 50px;
+}

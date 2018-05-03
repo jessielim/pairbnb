@@ -1,18 +1,16 @@
 
-  	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Navbar</a>
+  <nav class="navbar navbar-expand-lg navbar-light bg-color">
+    <a class="navbar-brand" href="/"><img src="https://s3-ap-southeast-1.amazonaws.com/jeshii-airbnb/45feac29-175d-4e97-8c39-2f29b5beab60.png"></a>
   
-  <!--<img src="../images/A.png" height="100px"> -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
+      
       <li class="nav-item active">
-        <%= link_to root_path do %>
-          Home <span class="sr-only">(current)</span>
-        <% end %>  
+        <a class="nav-link" href="/">Home<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/listings">Create listing</a>
@@ -23,23 +21,60 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="/reservations">View all reservations</a>
-          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href=about_path>About</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
-      <li class="nav-item">
+     <!--  <li class="nav-item">
         <a class="nav-link disabled" href="#">Disabled</a>
-      </li>
+      </li> -->
     </ul>
-    <!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form> -->
-   <% if signed_in? %>
-   <a href="/profile/edit">
-    <%= image_tag current_user.avatar.url, class:"rectangular-landscape" %>
-   </a>
-  <%end %>
+
+<ul class="navbar-nav ml-auto">
+      <% if signed_in? %>
+      <li class="nav-item dropdown">
+        <a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= image_tag current_user.avatar.url, class:"rectangular-landscape" %>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+         
+          <a class="dropdown-item disabled">Hello, <%= current_user.first_name %></a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/profile/edit">Edit profile</a>
+          <a class="dropdown-item" href="#">My Reservations</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">My Payment</a>
+          <a class="dropdown-item" href="/sign_out" data-method="delete">Sign out</a>
+      <% else %>
+          <li class="nav-item">
+            <a class="nav-link" href="/sign_in">Sign In</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/auth/google_oauth2?prompt=select_account">Sign in with Google</a>
+          </li>
+      <% end %>
+        </div>
+      </li>
+      
+</ul>
+    
+    <% if signed_in? %>
+    <%= current_user.email %>
+    <%= current_user.role %>
+    <%= button_to "Sign out", sign_out_path, method: :delete %>
+    <% else %>
+    <%= link_to "Sign in", sign_in_path %>
+    <%= link_to "Sign in with Google", "/auth/google_oauth2?prompt=select_account" %>
+    <% end %>
+    
+
+   
+   
+
+
+
+
+
   </div>
 </nav>

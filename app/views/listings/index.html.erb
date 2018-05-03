@@ -1,4 +1,6 @@
-
+ <% if @listing.blank? %>
+  <h4>There are no listings containing the term <%= params[:search] %>.</h4>
+<% end %>
 
 <h1>All listings</h1>
 
